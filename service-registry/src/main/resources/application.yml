@@ -1,0 +1,10 @@
+eureka:
+  client:
+    register-with-eureka: true # With false, it is not discoverable from eureka
+    fetch-registry: true # With false, it is not discoverable from eureka
+server:
+  port: 8761
+
+spring:
+  application:
+    name: service-registry

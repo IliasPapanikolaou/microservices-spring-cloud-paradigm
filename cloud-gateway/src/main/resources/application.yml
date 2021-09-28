@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+## http://localhost:8081/h2-console
+spring:
+  h2:
+    console:
+      enabled: true
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/order/** # Every request which comes with /order/** points at order-service
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/payment/** # Every request which comes with /order/** points at order-service
+
+eureka:
+  client:
+    register-with-eureka: true # When false, it is not discoverable from eureka
+    fetch-registry: true # When false, it is not discoverable from eureka
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
